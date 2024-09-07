@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle Financeiro</title>
+    <style>
+        body {
+            background-color: #FFA500;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header .logo {
+            width: 100px;
+            height: auto;
+        }
+        .header .welcome-message {
+            font-size: 18px;
+        }
+        .container {
+            background-color: #D3D3D3;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #bbb;
+        }
+        .logout-button {
+            background-color: #b0b0b0; /* Cor cinza */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .logout-button img {
+            margin-right: 8px;
+        }
+        .logout-button:hover {
+            background-color: #999999;
+        }
+        .return-button {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #333;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/home/altave/Vídeos/python-gu/static/Meraki.png" class="logo" alt="Logo">
+        <div class="welcome-message">Bem-vinda @Zerah!</div>
+    </div>
+    <div class="container">
+        <h2>Painel de Controle</h2>
+        <h3>Adicionar Transação</h3>
+        <form method="post">
+            <label for="description">Descrição:</label>
+            <input type="text" id="description" name="description" required>
+            <label for="amount">Valor:</label>
+            <input type="number" step="0.01" id="amount" name="amount" required>
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date" required>
+            <button type="submit" name="add_transaction">Adicionar Transação</button>
+        </form>
+        <h3>Definir Orçamento</h3>
+        <form method="post">
+            <label for="total">Orçamento Total:</label>
+            <input type="number" step="0.01" id="total" name="total" required>
+            <label for="spent">Valor Gasto:</label>
+            <input type="number" step="0.01" id="spent" name="spent" required>
+            <button type="submit" name="set_budget">Definir Orçamento</button>
+        </form>
+        <h3>Transações</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Luminária Led Sobrepor</td>
+                    <td>R$12.50</td>
+                    <td>2024-09-01</td>
+                </tr>
+                <tr>
+                    <td>Ponto de luz 24W</td>
+                    <td>R$45.75</td>
+                    <td>2024-09-02</td>
+                </tr>
+                <tr>
+                    <td>Haste de aterramento</td>
+                    <td>R$35.00</td>
+                    <td>2024-09-03</td>
+                </tr>
+                <tr>
+                    <td>Fita isolante</td>
+                    <td>R$55.00</td>
+                    <td>2024-09-04</td>
+                </tr>
+                <tr>
+                    <td>Luva PVC</td>
+                    <td>R$185.00</td>
+                    <td>2024-09-05</td>
+                </tr>
+                <tr>
+                    <td>Curva 90º</td>
+                    <td>R$200.00</td>
+                    <td>2024-09-06</td>
+                </tr>
+                <tr>
+                    <td>Curva 180º</td>
+                    <td>R$185.00</td>
+                    <td>2024-09-07</td>
+                </tr>
+                <tr>
+                    <td>Caixa octogonal</td>
+                    <td>R$166.31</td>
+                    <td>2024-09-08</td>
+                </tr>
+                <tr>
+                    <td>Caixa 4x2</td>
+                    <td>R$22.75</td>
+                    <td>2024-09-09</td>
+                </tr>
+                <tr>
+                    <td>Bucha zamak 3/4</td>
+                    <td>R$29.50</td>
+                    <td>2024-09-10</td>
+                </tr>
+                <tr>
+                    <td>Bucha zamak 1.1/2</td>
+                    <td>R$145.78</td>
+                    <td>2024-09-11</td>
+                </tr>
+                <tr>
+                    <td>Arruela zamak 3/4</td>
+                    <td>R$77.25</td>
+                    <td>2024-09-12</td>
+                </tr>
+                <tr>
+                    <td>Arruela zamak 1.1/2</td>
+                    <td>R$8.50</td>
+                    <td>2024-09-13</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Botões de ação -->
+        <a href="pagina_graficos.html" class="return-button">Ir para Gráficos</a>
+        <form action="login.html" method="GET" style="display: inline;">
+            <button type="submit" class="logout-button">
+                <img src="/home/altave/Vídeos/python-gu/static/signout_106525.png" alt="Sair" width="20"> Sair
+            </button>
+        </form>
+    </div>
+</body>
+</html>
