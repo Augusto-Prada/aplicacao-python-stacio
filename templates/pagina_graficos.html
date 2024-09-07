@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos e Orçamento</title>
+    <style>
+        body {
+            background-color: #FFA500;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #D3D3D3;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centraliza o texto e o conteúdo */
+        }
+        h2, h3 {
+            color: #333;
+        }
+        #chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px auto;
+            display: flex; /* Usa flexbox para centralizar o canvas */
+            justify-content: center;
+            align-items: center;
+        }
+        .budget-info {
+            margin-top: 20px;
+        }
+        .return-button {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Chart.js DataLabels plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Gráficos e Orçamento</h2>
+        <div id="chart-container">
+            <canvas id="myPieChart"></canvas>
+        </div>
+        <div class="budget-info">
+            <h3>Orçamento</h3>
+            <p>Orçamento Total: R$17.857,00</p>
+            <p>Valor Gasto: R$930.25</p>
+        </div>
+        <a href="dashboard.html" class="return-button">Voltar ao Painel</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [
+                        'Luminária Led Sobrepor', 'Ponto de luz 24W', 'Haste de aterramento',
+                        'Fita isolante', 'Luva PVC', 'Curva 90º', 'Curva 180º',
+                        'Caixa octogonal', 'Caixa 4x2', 'Bucha zamak 3/4', 'Bucha zamak 1.1/2',
+                        'Arruela zamak 3/4', 'Arruela zamak 1.1/2'
+                    ],
+                    datasets: [{
+                        data: [12.50, 45.75, 35.00, 55.00, 185.00, 200.00, 185.00, 166.31, 22.75, 29.50, 145.78, 77.25, 8.50],
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#FF5733', '#C70039',
+                            '#900C3F', '#581845', '#DAF7A6', '#FFC300', '#FF5733',
+                            '#C70039', '#900C3F', '#581845'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        datalabels: {
+                            color: '#fff',
+                            font: {
+                                weight: 'bold'
+                            },
+                            formatter: function(value, context) {
+                                let sum = context.chart._metasets[0].data.reduce((acc, data) => acc + data._model.circumference, 0);
+                                let percentage = ((value / sum) * 100).toFixed(2) + '%';
+                                return percentage;
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    let sum = 0;
+                                    let dataArr = context.dataset.data || [];
+                                    dataArr.forEach(data => sum += Number(data));
+                                    let percentage = ((value / sum) * 100).toFixed(2) + '%';
+                                    return label + ': ' + value + ' (' + percentage + ')';
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
